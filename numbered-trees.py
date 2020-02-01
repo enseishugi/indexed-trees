@@ -1,6 +1,6 @@
  #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-# indexed-strings.py
+# numbered-trees.py
 
 """Questo script genera un albero per org-mode che corrisponde alla lista di
 esercizi di un sectioning specificato dall'utente. Quanti esercizi siano, il
