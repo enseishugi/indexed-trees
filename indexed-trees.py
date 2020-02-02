@@ -104,7 +104,7 @@ def make_content(content_type, content_data, section):
 
     if content_type == 'block' and content_data != None:
         content += '+begin_%s\n+end_%s\n' % (content_data, content_data)
-        dim += 1
+        dim += 0
 
     if content_type == 'files' and content_data != None:
         path = content_data[0]
