@@ -114,7 +114,7 @@ def make_tree_model(section, tree_contents, label):
 
     content_types.remove('block')
     for t in content_types:
-        content, content_dim += make_content(t, tree_contents[t], section)
+        content, content_dim = make_content(t, tree_contents[t], section)
         tree_model += content
         dim += content_dim
 
