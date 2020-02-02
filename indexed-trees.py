@@ -108,7 +108,7 @@ def make_tree_model(section, tree_contents, label):
     # the others.
     content_types = tree_contents.keys()
     if 'block' in content_types:
-        content, content_dim += make_content('block', tree_contents['block'], section)
+        content, content_dim = make_content('block', tree_contents['block'], section)
         tree_model += content
         dim += content_dim
 
