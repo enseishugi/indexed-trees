@@ -1,7 +1,7 @@
- #!/usr/bin/python3
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 # indexed-trees.py
-# Python 3.7.5
+# Python 3.7.5 
 
 """Questo script genera un albero per org-mode che corrisponde alla lista di
 esercizi di un sectioning specificato dall'utente. Quanti esercizi siano, il
@@ -10,20 +10,17 @@ dall'utente.
 
 """
 
-
-def sequential_string(s, times, a, b):
-    """Stampa la stringa 's' assumendo che ci siano 'times' istanze dello stesso
-    indice intero che va da 'a' a 'b'.
+def print_trees(tree_model, values):
+    """Prints 'tree_model' replacing its "variables" traversing every value in
+    'values'.
+    
+    tree_model: string
+    values: tuple containing values replacing the "variables" in 'tree_model'
 
     """
 
-    # Costruisce la stringa "s % (i, ..., i)" che contiene 'times' volte 'i'.
-    t = "s % (i" + ", i" * (times-1) + ")"
-
-    # Qui è essenziale che 'i' sia l'indice nel ciclo for o dà errore 'eval(t)'
-    # perché manca la variabile 'i'.
-    for i in range(a, b+1):
-        print(eval(t))
+    for v in values:
+        print tree_model % v
         
 
 def print_exercise_tree(sectioning, section_number, section_name, n_exercises, depth, files):
