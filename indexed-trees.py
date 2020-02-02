@@ -159,7 +159,7 @@ def print_trees(tree_model, values, depth):
     """
 
     for v in values:
-        print tree_model % v
+        print(tree_model % v)
 
         
 # ===================
