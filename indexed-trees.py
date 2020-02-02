@@ -78,9 +78,8 @@ def ask_printing_data():
     print("Insert: number of iterations @ depth (separated by @)")
     data = list_strip(input("> ").split("@"), ' ')
     number_iterations, depth = list_int(data)
-    dim = 1
 
-    return number_iterations, depth, dim
+    return number_iterations, depth
 
 
 # ==============================
@@ -104,7 +103,6 @@ def make_content(content_type, content_data, section):
 
     if content_type == 'block' and content_data != None:
         content += '+begin_%s\n+end_%s\n' % (content_data, content_data)
-        dim += 0
 
     if content_type == 'files' and content_data != None:
         path = content_data[0]
@@ -191,6 +189,9 @@ def print_trees(tree_model, values, depth):
 
     """
 
+    prefix = (depth + 1) * '*'
+    string_model = '%s %s' % (prefix, tree_model)
+    
     for v in values:
         print(tree_model % v)
 
@@ -206,13 +207,12 @@ def print_exercise_tree():
     # Asks data to user
     section = ask_section() # section_type, section_number, section_name
     tree_contents = ask_contents() # Blocks, links, etc.
-    number_exercises, depth, dim_1 = ask_printing_data()
+    number_exercises, depth = ask_printing_data()
 
     # Makes string models
     heading = make_heading(section)
     # tree_heading, dim_2 = make_tree_heading('Exercise', section[1])
-    tree_model, dim_2 = make_tree_model(section, tree_contents, 'Exercise')
-    dim = dim_1 + dim_2
+    tree_model, dim = make_tree_model(section, tree_contents, 'Exercise')
 
     # Prints tree
     values = make_exercise_values(number_exercises, dim)
