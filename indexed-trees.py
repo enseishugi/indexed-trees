@@ -95,7 +95,7 @@ def make_content(content_type, content_data, section):
     dim = 0
 
     if content_type == 'block':
-        content += '+begin_%i\n+end_%i\n' % (content_data, content_data)
+        content += '+begin_%s\n+end_%s\n' % (content_data, content_data)
         dim += 1
 
     if content_type == 'files':
