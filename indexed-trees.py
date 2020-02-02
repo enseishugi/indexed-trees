@@ -226,7 +226,7 @@ def prompt_command():
         elif query in "exercise":
             print_exercise_tree()
         elif query in "string":
-            
+            pass
         
     print("Goodbye.")
         
