@@ -197,7 +197,7 @@ def print_exercise_tree():
 
     # Asks data to user
     section = ask_section() # section_type, section_number, section_name
-    tree_contents = ask_contents # Blocks, links, etc.
+    tree_contents = ask_contents() # Blocks, links, etc.
     number_exercises, depth, dim_1 = ask_printing_data()
 
     # Makes string models
