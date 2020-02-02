@@ -30,4 +30,4 @@ and sometimes I add hypertext to files
 so it's quite natural to delegate some of the work to a script.
 
 ## Future goals
-Well, I wrote this in python3 because I'm not fluent enough with elisp; this script was thought to be temporary. I'd eventually turn it into an org-mode Emacs function as soon as I'll be able to do it.
+Well, I wrote this in python3 because I'm not fluent enough with elisp; this script was thought to be temporary. I'd eventually turn it into an Emacs org-mode function as soon as I'll be able to do it.
