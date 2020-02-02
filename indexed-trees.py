@@ -55,10 +55,18 @@ def ask_contents():
     tree_contents = {}
     
     print("Insert: block name (if not, leave blank)")
-    tree_contents['block'] = input("> ")
+    block = input("> ")
+    if block == '':
+        tree_contents['block'] = None
+    else:
+        tree_contents['block'] = block.strip()
     
     print("Insert: files path @ file extension (if not, leave blank)")
-    tree_contents['files'] = list_strip(input("> ").split("@"), ' ')
+    files = input("> ")
+    if files == '':
+        tree_contents['files'] = None
+    else:
+        tree_contents['files'] = list_strip(files.split("@"), ' ')
 
     return tree_contents
 
@@ -94,11 +102,11 @@ def make_content(content_type, content_data, section):
     content = ''
     dim = 0
 
-    if content_type == 'block':
+    if content_type == 'block' and content_data != None:
         content += '+begin_%s\n+end_%s\n' % (content_data, content_data)
         dim += 1
 
-    if content_type == 'files':
+    if content_type == 'files' and content_data != None:
         path = content_data[0]
         extension = content_data[1]
         
