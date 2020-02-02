@@ -273,7 +273,7 @@ def print_trees(tree_model, values, depth):
 
     """
 
-    prefix = (depth + 1) * '*'
+    prefix = depth * '*'
     string_model = '%s %s' % (prefix, tree_model)
 
     for v in values:
@@ -302,7 +302,7 @@ def print_exercise_tree():
     # Prints tree
     values = make_exercise_values(number_exercises, dim)
     print_heading(heading, depth)
-    print_trees(tree_model, values, depth)
+    print_trees(tree_model, values, depth+1)
 
 
 # def print_numbered_string():
