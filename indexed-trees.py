@@ -21,7 +21,7 @@ def list_strip(l, s):
     newlist = []
     
     for i in l:
-        newlist.append(l.strip(s))
+        newlist.append(i.strip(s))
 
     return newlist
 
