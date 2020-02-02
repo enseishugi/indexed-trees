@@ -131,7 +131,7 @@ def make_tree_model(section, tree_contents, label):
 
     # This forces inserting the block at the very beginning (if there is), then
     # the others.
-    content_types = tree_contents.keys()
+    content_types = list(tree_contents.keys())
     if 'block' in content_types:
         content, content_dim = make_content('block', tree_contents['block'], section)
         tree_model += content
