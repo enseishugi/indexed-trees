@@ -13,13 +13,37 @@ dall'utente.
 # ====================
 # Functons asking data
 # ====================
+
+def list_strip(l, s):
+    """
+    """
+    
+    newlist = []
+    
+    for i in l:
+        newlist.append(l.strip(s))
+
+    return newlist
+
+
+def list_int(l):
+    """
+    """
+
+    newlist = []
+
+    for i in l:
+        newlist.append(int(i))
+
+    return newlist
+    
     
 def ask_section():
     """
     """
 
     print("Insert: section_type @ section_number @ section_name (separated by @)")
-    section = input("> ").split("@")
+    section = list_strip(input("> ").split("@"), ' ')
 
     return section
 
@@ -34,7 +58,7 @@ def ask_contents():
     tree_contents['block'] = input("> ")
     
     print("Insert: files path @ file extension (if not, leave blank)")
-    tree_contents['files'] = input("> ").split("@")
+    tree_contents['files'] = list_strip(input("> ").split("@"), ' ')
 
     return tree_contents
 
@@ -44,7 +68,8 @@ def ask_printing_data():
     """
 
     print("Insert: number of iterations @ depth (separated by @)")
-    number_iterations, depth = input("> ").split("@")
+    data = list_strip(input("> ").split("@"), ' ')
+    number_iterations, depth = list_int(data)
     dim = 1
 
     return number_iterations, depth, dim
