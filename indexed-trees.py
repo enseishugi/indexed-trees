@@ -10,9 +10,9 @@ dall'utente.
 
 """
 
-# ====================
-# Functons asking data
-# ====================
+# ===================
+# Ausiliary functions
+# ===================
 
 def list_strip(l, s):
     """Returns a string whose values are the '*.strip(s)' of the values in 'l'.
@@ -43,6 +43,23 @@ def list_int(l):
 
     return newlist
 
+
+def count_chars(s, c):
+    """
+    """
+
+    counting = 0
+
+    for l in s:
+        if l == c:
+            counting += 1
+
+    return counting
+
+
+# ====================
+# Functons asking data
+# ====================
     
 def ask_section():
     """Returns a list 'section' whose values are section_type, section_number,
@@ -91,6 +108,19 @@ def ask_printing_data():
     number_iterations, depth = list_int(data)
 
     return number_iterations, depth
+
+
+def ask_string_model():
+    """
+    """
+
+    print("Insert: string (put @ where iterators should be placed)")
+    data = input("> ")
+
+    dim = count_chars(data, "@")
+    string_model = data.replace("@", "%i")
+
+    return string_model, dim
 
 
 # ==============================
