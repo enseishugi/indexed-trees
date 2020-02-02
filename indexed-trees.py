@@ -138,7 +138,7 @@ def make_heading_from_section(section):
     return heading
 
 
-def make_content(content_type, content_data, section):
+def make_content(content_type, content_data, section=None):
     """Returns a string 'content' and an integer 'dim'.
 
     The string 'content' is a model string to be added to 'tree_model', and it's
@@ -163,19 +163,19 @@ def make_content(content_type, content_data, section):
         path = content_data[0]
         extension = content_data[1]
         
-        # Makes section name lowercase, deletes punctuation, and replaces spaces by em dashes
         section_type = section[0].lower()
         section_number = section[1].lower()
         section_name = section[2].translate({ord(c): None for c in ',;.:'}).lower().replace(' ', '-')
+        # Makes section name lowercase, deletes punctuation, and replaces spaces by em dashes
         iterator = '%i'
 
         exercise_filename = 'exercise-%s-%s.%s' % (section_number, iterator, extension)
         solution_folder = '%s-%s-%s/' % (section_type, section_number, section_name)
 
-        exercise_path = 'Exercise: file:%s%s.%s\n' % (path, exercise_filename, extension)
-        solution_path = 'Solution: file:%s/\n' % solution_folder
+        exercise_path = 'Exercise: file:%s%s.%s' % (path, exercise_filename, extension)
+        solution_path = 'Solution: file:%s/' % solution_folder
         
-        content += "%s%s" % (exercise_content, solution_content)
+        content += "%s\n%s\n" % (exercise_content, solution_content)
         dim += 1
 
     return content, dim
