@@ -127,7 +127,7 @@ def ask_string_model():
 # Functions making string models
 # ==============================
 
-def make_heading(section):
+def make_heading_from_section(section):
     """Returns a string 'heading', built using 'section'.
 
     section: list containing section_type, section_number, section_name
@@ -295,7 +295,7 @@ def print_exercise_tree():
     number_exercises, depth = ask_printing_data()
 
     # Makes string models
-    heading = make_heading(section)
+    heading = make_heading_from_section(section)
     # tree_heading, dim_2 = make_tree_heading('Exercise', section[1])
     tree_model, dim = make_tree_model(section, tree_contents, 'Exercise')
 
