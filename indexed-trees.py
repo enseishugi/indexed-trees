@@ -149,6 +149,18 @@ def make_content(content_type, content_data, section):
         dim += 1
 
     return content, dim
+
+
+def make_tree_heading(section, label):
+    """
+    """
+
+    iterator = '%i'
+    dim = 1
+
+    tree_heading = "%s %s.%s\n" % (label, section[1], iterator)
+
+    return tree_heading, dim
         
 
 def make_tree_model(section, tree_contents, label):
@@ -166,10 +178,7 @@ def make_tree_model(section, tree_contents, label):
 
     """
 
-    iterator = "%i"
-    dim = 1
-    
-    tree_model = "%s %s.%s\n" % (label, section[1], iterator)
+    tree_model, dim = make_tree_heading(section, label)
 
     # This forces inserting the block at the very beginning (if there is), then
     # the others.
