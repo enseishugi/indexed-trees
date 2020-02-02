@@ -211,8 +211,8 @@ def print_exercise_tree():
     # Makes string models
     heading = make_heading(section)
     # tree_heading, dim_2 = make_tree_heading('Exercise', section[1])
-    tree_model, dim_c = make_tree_model(section, tree_contents, 'Exercise')
-    dim = dim_c + dim_p
+    tree_model, dim_2 = make_tree_model(section, tree_contents, 'Exercise')
+    dim = dim_1 + dim_2
 
     # Prints tree
     values = make_exercise_values(number_exercises, dim)
