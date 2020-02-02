@@ -15,7 +15,10 @@ dall'utente.
 # ====================
 
 def list_strip(l, s):
-    """
+    """Returns a string whose values are the '*.strip(s)' of the values in 'l'.
+
+    l: list containing only strings.
+
     """
     
     newlist = []
@@ -27,7 +30,10 @@ def list_strip(l, s):
 
 
 def list_int(l):
-    """
+    """Returns a string whose values are the 'int(*)' of the values in 'l'.
+
+    l: list containing only strings compatible to 'int' function.
+
     """
 
     newlist = []
@@ -36,10 +42,12 @@ def list_int(l):
         newlist.append(int(i))
 
     return newlist
-    
+
     
 def ask_section():
-    """
+    """Returns a list 'section' whose values are section_type, section_number,
+    section_name.
+
     """
 
     print("Insert: section_type @ section_number @ section_name (separated by @)")
@@ -49,7 +57,9 @@ def ask_section():
 
 
 def ask_contents():
-    """
+    """Returns a dictionary whose keys are content_types and values are
+    content_data.
+
     """
 
     tree_contents = {}
@@ -72,7 +82,8 @@ def ask_contents():
 
     
 def ask_printing_data():
-    """
+    """ Returns two positive integers.
+    
     """
 
     print("Insert: number of iterations @ depth (separated by @)")
@@ -87,7 +98,10 @@ def ask_printing_data():
 # ==============================
 
 def make_heading(section):
-    """
+    """Returns a string 'heading', built using 'section'.
+
+    section: list containing section_type, section_number, section_name
+
     """
 
     heading = "%s %s - %s\n" % tuple(section)
@@ -95,7 +109,18 @@ def make_heading(section):
 
 
 def make_content(content_type, content_data, section):
-    """
+    """Returns a string 'content' and an integer 'dim'.
+
+    The string 'content' is a model string to be added to 'tree_model', and it's
+    built using 'content_type', 'content_data' and 'section'.
+
+    The integer 'dim' is the number of instances of iterators '%i' in
+    'content'.
+
+    content_type: string
+    content_data: string
+    section: list containing section_type, section_number, section_name
+
     """
 
     content = ''
@@ -127,7 +152,18 @@ def make_content(content_type, content_data, section):
         
 
 def make_tree_model(section, tree_contents, label):
-    """
+    """Returns a string 'tree_model' and an integer 'dim'.
+
+    The string 'tree_model' is the tree model, built using 'section'
+    informations and 'tree_contents'; each tree heading is labeled with 'label'.
+
+    The integer 'dim' is the number of instances of iterators '%i' in
+    'tree_model'.
+
+    section: list containing section_type, section_number, section_name
+    tree_contents: dictionary containing contents
+    label: string
+
     """
 
     iterator = "%i"
@@ -157,7 +193,12 @@ def make_tree_model(section, tree_contents, label):
 # ===========================
 
 def make_exercise_values(number_exercises, dim):
-    """
+    """Returns a list of tuples, each tuple contains the same number 'dim'
+    times. Numbers vary from 1 to 'number_exercises'.
+
+    number_exercises: positive integer
+    dim: positive integer
+
     """
 
     values = []
@@ -172,7 +213,11 @@ def make_exercise_values(number_exercises, dim):
 # ========================
 
 def print_heading(heading, depth):
-    """
+    """Prints 'heading' with given 'depth.
+
+    heading: string
+    depth: positive integer
+    
     """
 
     prefix = depth * '*'
@@ -191,9 +236,9 @@ def print_trees(tree_model, values, depth):
 
     prefix = (depth + 1) * '*'
     string_model = '%s %s' % (prefix, tree_model)
-    
+
     for v in values:
-        print(tree_model % v)
+        print(string_model % v)
 
         
 # ===================
@@ -201,7 +246,8 @@ def print_trees(tree_model, values, depth):
 # ===================
 
 def print_exercise_tree():
-    """
+    """Asks for sections, blocks and files to print a list of trees for exercises.
+
     """
 
     # Asks data to user
@@ -260,7 +306,7 @@ def prompt_command():
             print_exercise_tree()
         elif query in "string":
             pass
-        
+
     print("Goodbye.")
         
 
