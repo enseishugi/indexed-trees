@@ -308,15 +308,22 @@ def print_exercise_tree():
     print_trees(tree_model, values, depth+1)
 
 
-# def print_numbered_string():
-#     """
-#     """
+def print_numbered_strings():
+    """
+    """
 
-#     # Asks data to user
-#     string_model = 
-    
+    # Asks data to user
+    tree_heading, dim_1 = ask_heading_model()
+    tree_contents = ask_contents()
+    number_exercises, depth = ask_printing_data()
 
-#     print_trees(tree_model, values, depth)
+    # Makes string models
+    tree_model, dim_2 = make_tree_model(tree_heading, tree_contents)
+
+    # Prints tree
+    dim = dim_1 + dim_2
+    values = make_exercise_values(number_exercises, dim)
+    print_trees(tree_model, values, depth)
 
 
 # ====================
@@ -347,7 +354,7 @@ def prompt_command():
         elif query in "exercise":
             print_exercise_tree()
         elif query in "string":
-            pass
+            print_numbered_strings()
 
     print("Goodbye.")
         
