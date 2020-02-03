@@ -10,9 +10,9 @@ dall'utente.
 
 """
 
-# ====================
-# Functons asking data
-# ====================
+# ===================
+# Ausiliary functions
+# ===================
 
 def list_strip(l, s):
     """Returns a string whose values are the '*.strip(s)' of the values in 'l'.
@@ -43,6 +43,27 @@ def list_int(l):
 
     return newlist
 
+
+def count_chars(s, c):
+    """Counts how many times character 'c' appears in string 's'.
+
+    s: string
+    c: character
+
+    """
+
+    counting = 0
+
+    for l in s:
+        if l == c:
+            counting += 1
+
+    return counting
+
+
+# ====================
+# Functons asking data
+# ====================
     
 def ask_section():
     """Returns a list 'section' whose values are section_type, section_number,
@@ -82,7 +103,7 @@ def ask_contents():
 
     
 def ask_printing_data():
-    """ Returns two positive integers.
+    """Returns two positive integers.
     
     """
 
@@ -93,11 +114,28 @@ def ask_printing_data():
     return number_iterations, depth
 
 
+def ask_heading_model():
+    """Returns a model string 'heading_model' (having iterators) and a positive
+    integer 'dim' (its dimension, i.e. how many times the iterator is
+    appearing).
+
+    """
+
+    print("Insert: string (put @ where iterators should be placed)")
+    data = input("> ")
+
+    dim = count_chars(data, "@")
+    heading_model = data.replace("@", "%i")
+    heading_model += '\n'
+
+    return heading_model, dim
+    
+
 # ==============================
 # Functions making string models
 # ==============================
 
-def make_heading(section):
+def make_heading_from_section(section):
     """Returns a string 'heading', built using 'section'.
 
     section: list containing section_type, section_number, section_name
@@ -108,7 +146,7 @@ def make_heading(section):
     return heading
 
 
-def make_content(content_type, content_data, section):
+def make_content(content_type, content_data, section=None):
     """Returns a string 'content' and an integer 'dim'.
 
     The string 'content' is a model string to be added to 'tree_model', and it's
@@ -119,7 +157,7 @@ def make_content(content_type, content_data, section):
 
     content_type: string
     content_data: string
-    section: list containing section_type, section_number, section_name
+    section (None): list containing section_type, section_number, section_name
 
     """
 
@@ -133,25 +171,43 @@ def make_content(content_type, content_data, section):
         path = content_data[0]
         extension = content_data[1]
         
-        # Makes section name lowercase, deletes punctuation, and replaces spaces by em dashes
         section_type = section[0].lower()
         section_number = section[1].lower()
         section_name = section[2].translate({ord(c): None for c in ',;.:'}).lower().replace(' ', '-')
+        # Makes section name lowercase, deletes punctuation, and replaces spaces by em dashes
         iterator = '%i'
 
         exercise_filename = 'exercise-%s-%s.%s' % (section_number, iterator, extension)
         solution_folder = '%s-%s-%s/' % (section_type, section_number, section_name)
 
-        exercise_path = 'Exercise: file:%s%s.%s\n' % (path, exercise_filename, extension)
-        solution_path = 'Solution: file:%s/\n' % solution_folder
+        exercise_path = 'Exercise: file:%s%s.%s' % (path, exercise_filename, extension)
+        solution_path = 'Solution: file:%s/' % solution_folder
         
-        content += "%s%s" % (exercise_content, solution_content)
+        content += "%s\n%s\n" % (exercise_content, solution_content)
         dim += 1
 
     return content, dim
-        
 
-def make_tree_model(section, tree_contents, label):
+
+def make_heading_from_label(section, label):
+    """Returns a model string 'tree_heading' (having iterators) and a positive
+    integer 'dim' (its dimension, i.e. how many times the iterator is
+    appearing).
+
+    section: list containing section_type, section_number, section_name
+    label: string
+
+    """
+
+    iterator = '%i'
+    dim = 1
+
+    tree_heading = "%s %s.%s\n" % (label, section[1], iterator)
+
+    return tree_heading, dim
+
+
+def make_tree_model(tree_heading, tree_contents, section=None):
     """Returns a string 'tree_model' and an integer 'dim'.
 
     The string 'tree_model' is the tree model, built using 'section'
@@ -160,16 +216,14 @@ def make_tree_model(section, tree_contents, label):
     The integer 'dim' is the number of instances of iterators '%i' in
     'tree_model'.
 
-    section: list containing section_type, section_number, section_name
+    tree_heading: string
     tree_contents: dictionary containing contents
-    label: string
+    section (None): list containing section_type, section_number, section_name
 
     """
 
-    iterator = "%i"
-    dim = 1
-    
-    tree_model = "%s %s.%s\n" % (label, section[1], iterator)
+    tree_model = tree_heading
+    dim = 0
 
     # This forces inserting the block at the very beginning (if there is), then
     # the others.
@@ -234,7 +288,7 @@ def print_trees(tree_model, values, depth):
 
     """
 
-    prefix = (depth + 1) * '*'
+    prefix = depth * '*'
     string_model = '%s %s' % (prefix, tree_model)
 
     for v in values:
@@ -246,7 +300,8 @@ def print_trees(tree_model, values, depth):
 # ===================
 
 def print_exercise_tree():
-    """Asks for sections, blocks and files to print a list of trees for exercises.
+    """Asks for sections, blocks and files to print a tree, with subtrees for
+    exercises.
 
     """
 
@@ -256,25 +311,34 @@ def print_exercise_tree():
     number_exercises, depth = ask_printing_data()
 
     # Makes string models
-    heading = make_heading(section)
-    # tree_heading, dim_2 = make_tree_heading('Exercise', section[1])
-    tree_model, dim = make_tree_model(section, tree_contents, 'Exercise')
+    heading = make_heading_from_section(section)
+    tree_heading, dim_1 = make_heading_from_label(section, 'Exercise')
+    tree_model, dim_2 = make_tree_model(tree_heading, tree_contents, section)
 
     # Prints tree
+    dim = dim_1 + dim_2
     values = make_exercise_values(number_exercises, dim)
     print_heading(heading, depth)
+    print_trees(tree_model, values, depth+1)
+
+
+def print_numbered_strings():
+    """Asks for heading, block and files to print trees with given heading.
+
+    """
+
+    # Asks data to user
+    tree_heading, dim_1 = ask_heading_model()
+    tree_contents = ask_contents()
+    number_exercises, depth = ask_printing_data()
+
+    # Makes string models
+    tree_model, dim_2 = make_tree_model(tree_heading, tree_contents)
+
+    # Prints tree
+    dim = dim_1 + dim_2
+    values = make_exercise_values(number_exercises, dim)
     print_trees(tree_model, values, depth)
-
-
-# def print_numbered_string():
-#     """
-#     """
-
-#     # Asks data to user
-#     string_model = 
-    
-
-#     print_trees(tree_model, values, depth)
 
 
 # ====================
@@ -305,7 +369,7 @@ def prompt_command():
         elif query in "exercise":
             print_exercise_tree()
         elif query in "string":
-            pass
+            print_numbered_strings()
 
     print("Goodbye.")
         
