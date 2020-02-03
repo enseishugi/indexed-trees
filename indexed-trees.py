@@ -45,7 +45,11 @@ def list_int(l):
 
 
 def count_chars(s, c):
-    """
+    """Counts how many times character 'c' appears in string 's'.
+
+    s: string
+    c: character
+
     """
 
     counting = 0
@@ -99,7 +103,7 @@ def ask_contents():
 
     
 def ask_printing_data():
-    """ Returns two positive integers.
+    """Returns two positive integers.
     
     """
 
@@ -111,7 +115,10 @@ def ask_printing_data():
 
 
 def ask_heading_model():
-    """
+    """Returns a model string 'heading_model' (having iterators) and a positive
+    integer 'dim' (its dimension, i.e. how many times the iterator is
+    appearing).
+
     """
 
     print("Insert: string (put @ where iterators should be placed)")
@@ -120,9 +127,9 @@ def ask_heading_model():
     dim = count_chars(data, "@")
     heading_model = data.replace("@", "%i")
     heading_model += '\n'
-    
-    return heading_model, dim
 
+    return heading_model, dim
+    
 
 # ==============================
 # Functions making string models
@@ -150,7 +157,7 @@ def make_content(content_type, content_data, section=None):
 
     content_type: string
     content_data: string
-    section: list containing section_type, section_number, section_name
+    section (None): list containing section_type, section_number, section_name
 
     """
 
@@ -183,7 +190,13 @@ def make_content(content_type, content_data, section=None):
 
 
 def make_heading_from_label(section, label):
-    """
+    """Returns a model string 'tree_heading' (having iterators) and a positive
+    integer 'dim' (its dimension, i.e. how many times the iterator is
+    appearing).
+
+    section: list containing section_type, section_number, section_name
+    label: string
+
     """
 
     iterator = '%i'
@@ -192,7 +205,7 @@ def make_heading_from_label(section, label):
     tree_heading = "%s %s.%s\n" % (label, section[1], iterator)
 
     return tree_heading, dim
-        
+
 
 def make_tree_model(tree_heading, tree_contents, section=None):
     """Returns a string 'tree_model' and an integer 'dim'.
@@ -203,15 +216,15 @@ def make_tree_model(tree_heading, tree_contents, section=None):
     The integer 'dim' is the number of instances of iterators '%i' in
     'tree_model'.
 
-    section: list containing section_type, section_number, section_name
+    tree_heading: string
     tree_contents: dictionary containing contents
-    label: string
+    section (None): list containing section_type, section_number, section_name
 
     """
 
     tree_model = tree_heading
     dim = 0
-    
+
     # This forces inserting the block at the very beginning (if there is), then
     # the others.
     content_types = list(tree_contents.keys())
@@ -287,7 +300,8 @@ def print_trees(tree_model, values, depth):
 # ===================
 
 def print_exercise_tree():
-    """Asks for sections, blocks and files to print a list of trees for exercises.
+    """Asks for sections, blocks and files to print a tree, with subtrees for
+    exercises.
 
     """
 
@@ -309,7 +323,8 @@ def print_exercise_tree():
 
 
 def print_numbered_strings():
-    """
+    """Asks for heading, block and files to print trees with given heading.
+
     """
 
     # Asks data to user
