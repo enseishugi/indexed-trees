@@ -110,7 +110,7 @@ def ask_printing_data():
     return number_iterations, depth
 
 
-def ask_string_model():
+def ask_heading_model():
     """
     """
 
@@ -118,9 +118,10 @@ def ask_string_model():
     data = input("> ")
 
     dim = count_chars(data, "@")
-    string_model = data.replace("@", "%i")
-
-    return string_model, dim
+    heading_model = data.replace("@", "%i")
+    heading_model += '\n'
+    
+    return heading_model, dim
 
 
 # ==============================
@@ -181,7 +182,7 @@ def make_content(content_type, content_data, section=None):
     return content, dim
 
 
-def make_tree_heading(section, label):
+def make_heading_from_label(section, label):
     """
     """
 
@@ -193,7 +194,7 @@ def make_tree_heading(section, label):
     return tree_heading, dim
         
 
-def make_tree_model(section, tree_contents, label):
+def make_tree_model(tree_heading, tree_contents, section=None):
     """Returns a string 'tree_model' and an integer 'dim'.
 
     The string 'tree_model' is the tree model, built using 'section'
@@ -208,8 +209,9 @@ def make_tree_model(section, tree_contents, label):
 
     """
 
-    tree_model, dim = make_tree_heading(section, label)
-
+    tree_model = tree_heading
+    dim = 0
+    
     # This forces inserting the block at the very beginning (if there is), then
     # the others.
     content_types = list(tree_contents.keys())
@@ -296,10 +298,11 @@ def print_exercise_tree():
 
     # Makes string models
     heading = make_heading_from_section(section)
-    # tree_heading, dim_2 = make_tree_heading('Exercise', section[1])
-    tree_model, dim = make_tree_model(section, tree_contents, 'Exercise')
+    tree_heading, dim_1 = make_heading_from_label(section, 'Exercise')
+    tree_model, dim_2 = make_tree_model(tree_heading, tree_contents, section)
 
     # Prints tree
+    dim = dim_1 + dim_2
     values = make_exercise_values(number_exercises, dim)
     print_heading(heading, depth)
     print_trees(tree_model, values, depth+1)
